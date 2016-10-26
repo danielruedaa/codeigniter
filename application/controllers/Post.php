@@ -8,7 +8,7 @@ class Post extends CI_Controller
             //  $this->load->helper('url_helper'); //si no esta cargado en el autoload.php
             //  $this->load->helper('form');
             //$this->load->helper('form_validation');
-          //   $this->load->model('Postm');//cago el modelo
+          $this->load->model('Postm'); //cago el modelo
     }
 
     public function index()
@@ -26,36 +26,46 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
           'email' => $this->input->post('email'),
           'clave' => $this->input->post('Password'),
           );
-            //send data to controller
-            $this->news_model->Sesion($data['email']);
 
         if ($this->form_validation->run() == true) {
             $datos['mensaje'] = 'Validación correcta';
-            $databd['news'] = $this->modelopost->getSesion(); //traer los datos de la bd
-                   //hago la comparacion
-                   if ($data['email'] == $databd['email'] && $data['clave'] == $databd['clave']) {
-                       switch ($databd['rol']) {
-                               case 'Administrador':
-                                 // code...
-                               $this->load->view('Post/Pp');
-                                 break;
-                               case 'Editor':
-                                 // code...
-                               $this->load->view('viewpost/post1');
-                                 break;
-                               case 'Usuario':
-                               $this->load->view('Post/Inicio');
-                                 // code...
-                                 break;
-                               default:
-                                 // code...
-                               $this->load->view('viewpost/Inicio');
-                               break;
-                         }
-                   }
+
+                   //send data to controller
+                   $infoUser = $this->Postm->getUser($data['email']);
+            if (!empty($infoUser)) {
+                //hago la comparacion
+                if ($data['email'] == $databd['email'] && $data['clave'] == $databd['clave']) {
+                    switch ($databd['rol']) {
+                            case 'Administrador':
+                              // code...
+                            $this->load->view('post/Pp');
+                              break;
+                            case 'Editor':
+                              // code...
+                            $this->load->view('post/post1');
+                              break;
+                            case 'Usuario':
+                            $this->load->view('Post/Inicio');
+                              // code...
+                              break;
+                            default:
+                              // code...
+                            $this->load->view('post/Inicio');
+                            break;
+                      }
+                }
+     */
+            } else {
+
+                // vacio ...
+            }
+
+
+
         } else {
+            //else de la validacion
             $datos['mensaje'] = 'Validación incorrecta';
-            $this->load->view('post/Inicio');
+            $this->load->view('post/Inicio', $datos);
         }
     }
 
