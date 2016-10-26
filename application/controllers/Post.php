@@ -164,10 +164,11 @@ class Post extends CI_Controller
         // code...
       $this->load->library('pagination');
         $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination';
-        $config['total_rows'] = 5;
         $config['per_page'] = 3;
         $config['num_links'] = 3;
+        $config['total_rows'] = $this->db->get('usuario')->num_rows();
         $this->pagination->initialize($config);
-        echo $this->pagination->create_links();
+        $rows['query'] = $this->db->get('usuario', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('post/manager_administrador', $rows);
     }
 }//finm
