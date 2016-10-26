@@ -30,7 +30,7 @@ class Post extends CI_Controller
      *
      * @param string $value representa el valor de algo
      */
-    public function session($value = '')
+    public function session()
     {
         // code...
         $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
@@ -48,9 +48,9 @@ class Post extends CI_Controller
             if (!empty($infoUser)) {
                 //hago la comparacion
                 if ($data['email'] == $infoUser['email'] && $data['clave'] == $infoUser['clave']) {
-                    $template = $infoUser['rol'];
-                    if (file_exists('APP'.'view/post/'.strtolower($template).'.php')) {
-                        $this->load->view('view/post/'.strtolower($template));
+                    $template = strtolower($infoUser['rol']);
+                    if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
+                        $this->load->view('post/manager_'.$template);
                     } else {
                         show_404();
                     }
