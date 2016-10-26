@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document  dentro de este puedo definir los estilos para la pagina principal*/
+h1{	color:#00C; alignment-adjust:central; font-size:50px; font:"Courier New", Courier, monospace; text-decoration:blink;	}
+	/* contraste para las celdas de texto*/
+input:focus{border:#6C9;}
+input:hover{background:#6FC;}
+	h2{color:#00C;  font-size:30px; font:Verdana, Geneva, sans-serif; text-decoration: blink;	}
+	/*p{		color:#09C;		text-wrap:unrestricted; font-size:12px;  font:oblique 100% "Trebuchet MS", Arial, Helvetica, sans-serif;	}*/
+	#p1{color:#096;		text-wrap:unrestricted; font-size:12px;  font:oblique 100% "Trebuchet MS", Arial, Helvetica, sans-serif;	}
+	/* creo una clase en el codigo html debe ir asi 
+	<p class="creado"> texto </p>
+	
+	*/
+.creado{ font:oblique 120% Tahoma, Geneva, sans-serif;	color:#339;}
+#piePagina{	color:#063;}
+
+nav ul li{	color:#C06; }
+
+body{color:#036;	
+margin-left:1px;margin-top:1px;margin-right:1px;margin-botton:0px;
+}
+
+/* efectos sencillos para links en paginas web hover seudoclases
+1. definimos el elemento a de a herf
+2. luego los link q no se visitan
+3. pasar por encima
+	*/
+a{color:#000; text-decoration:none;}
+a:link{color:#009;}
+a:visited{color:#000;}
+a:hover{color:#C0C0C0}	
+/*alinear contenidos este es para el registro le ponemos el nombre div en el codigo html
+pero es mejor con poscicion */
+#registros{ width:800px; margin:0  auto; height:	400px;
+border-right:solid; border-left:solid;border-width:2px;border-color:#CCC;}	
+/*creamos contenedor general*/
+/*#general{margin:auto; margin-top:0px;width:500px; height: 500px; background:#fff}
+/*creamos contenedor para el registro*/
+#general{margin:auto; margin-top:0px;width:500px; height: 500px; background:#fff}
+
+#registro{width:320px; height:300px; background:#CCC;float:left;margin-left:250px; text-align: center;}
+#prueba {width:400px;margin:auto;}	
+#borrar{width:320px; height:300px; background:#CCC;float:left;margin-left:0px;}	
+#iniciar{width:270px; height:250px; background:#F33;  }	
+	
+	
+	
+	
+	
