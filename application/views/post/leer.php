@@ -28,22 +28,22 @@
 <body>
   <div class="container" >
 
-<h1>Bienvenido al sistema </h1> 
+<h1>Bienvenido al sistema </h1>
 </div>
 
 
 <?php
-include ('leerbd.php');
+//include ('leerbd.php');
 
 ?>
  <div class="container" id="general">
 <table class="table">
 
-<?php if(!empty($rows)): ?>
+<?php if (!empty($rows)): ?>
 
 <?php foreach ($rows as $key => $value) : ?>
   <tr>
-    
+
     <td><?php echo $value['name'] ?></td>
     <td><?php echo $value['pos'] ?></td>
     <td><?php echo $value['fecha'] ?></td>
@@ -51,13 +51,13 @@ include ('leerbd.php');
 
    <td>
 <!--<a href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>"onclick="msge()">editar</a>-->
-<!--<input id="ocultob"  type="button" value="borrar" onclick="msgb()" />--> 
-<!-- hago el control para hacer visible los botones--> 
+<!--<input id="ocultob"  type="button" value="borrar" onclick="msgb()" />-->
+<!-- hago el control para hacer visible los botones-->
 
 <input   type="button" value="editar" onclick="msge()" />
 <input   type="button" value="borrar" onclick="msgb()" />
 <!--
-<div id="ocultob" style='display:none';> 
+<div id="ocultob" style='display:none';>
 <input   type="button" value="borrar" onclick="msgb()" />
 </div>
 <div id="ocultoe" style='display:none';>
@@ -73,16 +73,16 @@ var b=confirm("Deseas borrar este registro?");
 if (b == true) {
   document.location.href="phpBaseDatos/borrarCom.php?id=<?php echo $value['id'] ?>";
 } else {
-  // document.location.href="Pp.php";   
+  // document.location.href="Pp.php";
     }
 }
 function msge(){
 var e=confirm("Deseas editar este registro?");
 if (e == true) {
   document.location.href="Ppeditarcom.php?id=<?php echo $value['id'] ?>";
-     
+
 } else {
- //document.location.href="Pp.php"; 
+ //document.location.href="Pp.php";
   }
 }
 </script>
@@ -96,14 +96,14 @@ if (e == true) {
 </ul>
 </tr>
 
-  
+
 
 
 <!--   -->
 
 <?php else : ?>
 
-<?php endif; ?> 
+<?php endif; ?>
 
 </tr>
 

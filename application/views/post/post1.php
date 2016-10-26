@@ -36,22 +36,30 @@
 </head>
 
 <div class="text-center">
-<h1>Bienvenido escribe tu post ....</h1> 
+<h1>Bienvenido </h1>
 </div>
 
 <body>
-<form action="phpBaseDatos/comentarios.php" method="post" >
-<div class="text-center">
-<td>Nombre : </td>
-<td>  
-<input type="text" name= "nombre"    value= "" placeholder="Daniel Rueda" required="required">       </td>
 
+  <?php
+  //echo validation_errors(); // para validar los errores
+  echo form_open('post/guardarPost'); // asignar la ruta para mandar los datos por post
+  ?>
+<div class="text-center">
+
+
+<td class="text-left">Nombre : </td>
+<td><input type="text" name= "nombre"    value= "" placeholder="Daniel Rueda" required="required">       </td>
+<br/>
+</tr>
+<td class="text-left" >Escribe tu post .... </td>
+</tr>
 <textarea name="editor1" id="editor1"></textarea>
 <table class="table" >
 
 <ul class="text-left">
- <li><a href = "Inicio.html">inicio</a> </li>
-  <li>        <a href = "leer.php">ir al post</a></li>
+ <li><a href =" <?php echo site_url('post'); ?>">inicio</a> </li>
+<li>        <a href = "<?php echo site_url('post/leer'); ?>">ir al post</a></li>
    <li>  <input type="submit" value="guardar"> </li>
 
 </ul>

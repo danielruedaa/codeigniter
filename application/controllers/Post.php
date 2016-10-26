@@ -30,12 +30,12 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
         if ($this->form_validation->run() == true) {
             $datos['mensaje'] = 'Validación correcta';
 
-                   //send data to controller
+                   //envio un parametro y recoj el dato
                    $infoUser = $this->Postm->getUser($data['email']);
             if (!empty($infoUser)) {
                 //hago la comparacion
-                if ($data['email'] == $databd['email'] && $data['clave'] == $databd['clave']) {
-                    switch ($databd['rol']) {
+                if ($data['email'] == $infoUser['email'] && $data['clave'] == $infoUser['clave']) {
+                    switch ($infoUser['rol']) {
                             case 'Administrador':
                               // code...
                             $this->load->view('post/Pp');
@@ -45,7 +45,7 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
                             $this->load->view('post/post1');
                               break;
                             case 'Usuario':
-                            $this->load->view('Post/Inicio');
+                            $this->load->view('post/leer');
                               // code...
                               break;
                             default:
@@ -53,15 +53,16 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
                             $this->load->view('post/Inicio');
                             break;
                       }
+                } else {
+                    // code...
+                  $erroSesion['error'] = 'Clave o correo invalido';
+                    $this->load->view('post/Inicio', $erroSesion);
                 }
-     */
             } else {
-
+                $errorConsulta['error'] = 'No existen los datos';
+                $this->load->view('post/Inicio', $errorConsulta);
                 // vacio ...
             }
-
-
-
         } else {
             //else de la validacion
             $datos['mensaje'] = 'Validación incorrecta';
@@ -103,48 +104,64 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
             if ($this->form_validation->run() == true) {
                 $datos['mensaje'] = 'Validación correcta';
 
-                return $this->db->insert('usuario', $data);
+                //return $this->db->insert('usuario', $data);
+
+                switch ($data['rol']) {
+                  case 'Administrador':
+                    // code...
+                  $this->load->view('post/Pp');
+                    break;
+                  case 'Editor':
+                    // code...
+                  $this->load->view('post/post1');
+                    break;
+                  case 'Usuario':
+                  $this->load->view('post/Inicio');
+                    // code...
+                    break;
+                  default:
+                    // code...
+                  $this->load->view('post/Inicio');
+                    break;
+                }
             } else {
                 $datos['mensaje'] = 'Validación incorrecta';
                 $this->load->view('post/Crear', $datos);
             }
-                  //comparo el rol para dirigirlo a la pagina adecuada
-/*
-            if ($data['rol'] == 'Administrador') {
-                $this->load->view('Post/Pp');
-            } elseif ($data['rol'] == 'Editor') {
-                // code...
-                       $this->load->view('viewpost/post1');
-            } elseif ($data['rol'] == 'Usuario') {
-                // code...
-                     $this->load->view('Post/leer');
-            } else {
-                // code...
-                     $this->load->view('Post/Inicio');
-            }
-            */
-                /*
-                      switch ($data['rol']) {
-                      	case 'Administrador':
-                      		# code...
-                      	$this->load->view('Post/Pp');
-                      		break;
-                      	case 'Editor':
-                      		# code...
-                      	$this->load->view('viewpost/post1');
-                      		break;
-                      	case 'Usuario':
-                      	$this->load->view('Post/Inicio');
-                      		# code...
-                      		break;
 
-                      	default:
-                      		# code...
-                      	//echo '<script language="javascript">alert("invalido");</script>';
-                      	$this->load->view('viewpost/Inicio');
-
-                      		break;
-                      }
-*/
+            return $this->db->insert('usuario', $data);
         }
+
+    public function guardarPost($value = '')
+    {
+        // code...
+        // validacion de datos
+        $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[2]|max_length[20]');
+        $this->form_validation->set_rules('editor1', 'Escribe tu post ....', 'trim|required|min_length[5]');
+
+      // mensajes de validacion
+         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+        $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
+        $this->form_validation->set_message('min_length[5]', 'El campo %s debe tener mas de 5 caracteres');
+
+        $data = array(
+             'nombre' => $this->input->post('nombre'),
+             'editor1' => $this->input->post('editor1'),
+             'fecha' => $this->date('d/m/y '),
+             'hora' => $this->date('g:ia'),
+                      );
+        if ($this->form_validation->run() == true) {
+            $datos['mensaje'] = 'Validación correcta';
+
+          return $this->db->insert('post', $data);
+
+
+                          }
+        } else {
+            $datos['mensaje'] = 'Validación incorrecta';
+            $this->load->view('post/Crear', $datos);
+        }
+
+        return $this->db->insert('usuario', $data);
+    }
 }//finm

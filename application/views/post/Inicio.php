@@ -70,8 +70,16 @@
 echo form_close();
 echo validation_errors();
 ?>
-<h2><?php if(isset($mensaje)) echo $mensaje; ?></h2>
-
+<h2><?php if (isset($mensaje)) {
+    echo $mensaje;
+} ?></h2>
+<!-- avizo de error en los datos-->
+<h4><?php if (isset($error)) {
+    echo $error;
+} ?></h4>
+<h4><?php if (isset($errorConsulta)) {
+    echo $errorConsulta;
+} ?></h4>
  </div>
 </form>
 
