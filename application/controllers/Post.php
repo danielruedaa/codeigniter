@@ -2,6 +2,9 @@
 
 class Post extends CI_Controller
 {
+    /**
+     * [__construct description].
+     */
     public function __construct()
     {
         parent::__construct();
@@ -10,16 +13,27 @@ class Post extends CI_Controller
             //$this->load->helper('form_validation');
           $this->load->model('Postm'); //cago el modelo
     }
-
+    /**
+     * [index description].
+     *
+     * @author pepito perez <pepe@ptk.com.co>
+     */
     public function index()
     {
         //  $leerdb['news'] = $this->modelopost->get_news();
                 $this->load->view('post/Inicio'); //cargo el inicio del proyecto
     }
+    /**
+     * Genera algo.
+     *
+     * @author pápap
+     *
+     * @param string $value representa el valor de algo
+     */
     public function session($value = '')
     {
         // code...
-$this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
         $this->form_validation->set_rules('Password', 'Clave', 'trim|required|min_length[5]|max_length[20]');
         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $data = array(
@@ -29,33 +43,19 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
 
         if ($this->form_validation->run() == true) {
             $datos['mensaje'] = 'Validación correcta';
-
-                   //envio un parametro y recoj el dato
-                   $infoUser = $this->Postm->getUser($data['email']);
+            //envio un parametro y recoj el dato
+            $infoUser = $this->Postm->getUser($data['email']);
             if (!empty($infoUser)) {
                 //hago la comparacion
                 if ($data['email'] == $infoUser['email'] && $data['clave'] == $infoUser['clave']) {
-                    switch ($infoUser['rol']) {
-                            case 'Administrador':
-                              // code...
-                            $this->load->view('post/Pp');
-                              break;
-                            case 'Editor':
-                              // code...
-                            $this->load->view('post/post1');
-                              break;
-                            case 'Usuario':
-                            $this->load->view('post/leer');
-                              // code...
-                              break;
-                            default:
-                              // code...
-                            $this->load->view('post/Inicio');
-                            break;
-                      }
+                    $template = $infoUser['rol'];
+                    if (file_exists('APP'.'view/post/'.strtolower($template).'.php')) {
+                        $this->load->view('view/post/'.strtolower($template));
+                    } else {
+                        show_404();
+                    }
                 } else {
-                    // code...
-                  $erroSesion['error'] = 'Clave o correo invalido';
+                    $erroSesion['error'] = 'Clave o correo invalido';
                     $this->load->view('post/Inicio', $erroSesion);
                 }
             } else {
@@ -69,7 +69,11 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
             $this->load->view('post/Inicio', $datos);
         }
     }
-
+    /**
+     * [crear description].
+     *
+     * @return [type] [description]
+     */
     public function crear()
     {
         //cargar la pagina para crear la cuenta
@@ -88,7 +92,7 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
             $this->form_validation->set_rules('Password', 'Clave', 'trim|required|min_length[5]|max_length[20]');
 
           // mensajes de validacion
-             $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+           $this->form_validation->set_message('required', 'El campo %s es obligatorio');
             $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
             $this->form_validation->set_message('min_length[3]', 'El campo %s debe tener mas de 3 caracteres');
             $this->form_validation->set_message('valid_email', 'El campo %s debe ser un email correcto');
@@ -137,31 +141,26 @@ $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]
         // code...
         // validacion de datos
         $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[2]|max_length[20]');
-        $this->form_validation->set_rules('editor1', 'Escribe tu post ....', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('editor1', 'Escribe', 'trim|required|min_length[5]');
 
       // mensajes de validacion
-         $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+        $this->form_validation->set_message('required', 'El campo %s es obligatorio');
         $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
         $this->form_validation->set_message('min_length[5]', 'El campo %s debe tener mas de 5 caracteres');
 
-        $data = array(
-             'nombre' => $this->input->post('nombre'),
-             'editor1' => $this->input->post('editor1'),
-             'fecha' => $this->date('d/m/y '),
-             'hora' => $this->date('g:ia'),
-                      );
         if ($this->form_validation->run() == true) {
+            $datapost = array(
+               'nombre' => $this->input->post('nombre'),
+               'post' => $this->input->post('editor1'),
+               'created' => date('Y-m-d H:i:s'),
+          );
             $datos['mensaje'] = 'Validación correcta';
 
-          return $this->db->insert('post', $data);
-
-
-                          }
+            return $this->db->insert('post', $datapost);
         } else {
             $datos['mensaje'] = 'Validación incorrecta';
             $this->load->view('post/Crear', $datos);
         }
-
-        return $this->db->insert('usuario', $data);
+        // vista
     }
 }//finm
