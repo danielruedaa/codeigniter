@@ -26,48 +26,30 @@
 
 </head>
 <body>
-	
+
 <div class="text-center">
-<h1>Bienvenido al sistema </h1> 
+<h1>Bienvenido al sistema </h1>
 </div>
-
-
-<?php
-include ('codPaginarZ.php');
-
-?>
 <div class="container">
 
 <table id="prueba"  class="table">
 <div class="text-center">
 
-<?php if(!empty($rows)): ?>
+<?php if (!empty($rows)): ?>
 
 <?php foreach ($rows as $key => $value) : ?>
   <tr>
-    
+
     <td><?php echo $value['name'] ?></td>
     <td><?php echo $value['login'] ?></td>
     <td><?php echo $value['rol'] ?></td>
     <td><?php echo $value['email'] ?></td>
    <td>
-<!--<a href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>"onclick="msge()">editar</a>-->
-<!--<input id="ocultob"  type="button" value="borrar" onclick="msgb()" />--> 
-<!-- hago el control para hacer visible los botones--> 
 
 <input   type="button" value="editar" onclick="msge()" />
 <input   type="button" value="borrar" onclick="msgb()" />
-<!--
-<div id="ocultob" style='display:none';> 
-<input   type="button" value="borrar" onclick="msgb()" />
-</div>
-<div id="ocultoe" style='display:none';>
-<input type="button" value="editar" onclick="msge()" />
-</div> -->
     </td>
-
   </tr>
-
 <script language="javascript">
 // funcion para ocultar
 
@@ -77,7 +59,7 @@ if (b == true) {
    document.location.href="phpBaseDatos/borrar.php?id=<?php echo $value['id'] ?>";
    alert(" registro Borrado  ");
 } else {
-  // document.location.href="Pp.php";   
+  // document.location.href="Pp.php";
     }
 }
 function msge(){
@@ -85,22 +67,22 @@ var e=confirm("Deseas editar este registro?");
 if (e == true) {
     //document.location.href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>";
     document.location.href="Ppeditar.php?id=<?php echo $value['id'] ?>";
-     
+
 } else {
- //document.location.href="Pp.php"; 
+ //document.location.href="Pp.php";
   }
 }
 </script>
 
 
-<?php endforeach; ?>
-
-
+<?php endforeach;
+echo $this->pagination->create_links();
+ ?>
 <!--   -->
 
 <?php else : ?>
 
-<?php endif; ?>	
+<?php endif; ?>
 
 </tr>
 </table>

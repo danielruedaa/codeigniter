@@ -80,7 +80,11 @@ class Post extends CI_Controller
           $this->load->view('post/Crear');
     }
 
-        //funcion para guardar los datos para crear cuenta
+        /**
+         * [crearusuario description].
+         *
+         * @return [type] [description]
+         */
         public function crearusuario()
         {
             // validacion de datos
@@ -107,7 +111,7 @@ class Post extends CI_Controller
 
             if ($this->form_validation->run() == true) {
                 $datos['mensaje'] = 'Validación correcta';
-                $template = strtolower($infoUser['rol']);
+                $template = strtolower($data['rol']);
                 if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
                     $this->load->view('post/manager_'.$template);
                 } else {
@@ -120,7 +124,13 @@ class Post extends CI_Controller
 
             return $this->db->insert('usuario', $data);
         }
-
+    /**
+     * [guardarPost description].
+     *
+     * @param string $value [description]
+     *
+     * @return [type] [description]
+     */
     public function guardarPost($value = '')
     {
         // code...
@@ -147,5 +157,18 @@ class Post extends CI_Controller
             $this->load->view('post/Crear', $datos);
         }
         // vista
+    }
+
+    public function pagination()
+    {
+        // code...
+      $this->load->library('pagination');
+        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination';
+        $config['per_page'] = 3;
+        $config['num_links'] = 3;
+        $config['total_rows'] = $this->db->get('usuario')->num_rows();
+        $this->pagination->initialize($config);
+        $rows['query'] = $this->db->get('usuario', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('post/manager_administrador', $rows);
     }
 }//finm
