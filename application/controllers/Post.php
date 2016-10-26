@@ -107,26 +107,11 @@ class Post extends CI_Controller
 
             if ($this->form_validation->run() == true) {
                 $datos['mensaje'] = 'Validación correcta';
-
-                //return $this->db->insert('usuario', $data);
-
-                switch ($data['rol']) {
-                  case 'Administrador':
-                    // code...
-                  $this->load->view('post/Pp');
-                    break;
-                  case 'Editor':
-                    // code...
-                  $this->load->view('post/post1');
-                    break;
-                  case 'Usuario':
-                  $this->load->view('post/Inicio');
-                    // code...
-                    break;
-                  default:
-                    // code...
-                  $this->load->view('post/Inicio');
-                    break;
+                $template = strtolower($infoUser['rol']);
+                if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
+                    $this->load->view('post/manager_'.$template);
+                } else {
+                    show_404();
                 }
             } else {
                 $datos['mensaje'] = 'Validación incorrecta';
