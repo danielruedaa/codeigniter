@@ -39,7 +39,7 @@
    <td>
 
 <?php
-echo anchor('/send_editar/'.$id, 'editar', 'title="editar_usuario"', 'onclick="msge"');
+echo anchor('post/send_editar/'.$id, 'editar', array('class' => '_editar'));
 ?>
 
 <?php
@@ -50,8 +50,6 @@ echo anchor('/send_editar/'.$id, 'editar', 'title="editar_usuario"', 'onclick="m
 );
 echo form_button($buttonDelete, 'borrar', $funcion, $id);
 ?>
-
-
 <!--<input   type="button" value="editar" onclick="msge()" />
 <input   type="button" value="borrar" onclick="msgb()" />-->
     </td>

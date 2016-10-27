@@ -209,8 +209,8 @@ class Post extends CI_Controller
     public function send_editar($dato_edicion)
     {
         // code...
-        $id = $_GET['id'];
-        echo $id;
+        echo $dato_edicion;
+        die();
 
       //envio un parametro y recoj el dato
       $infoUser['query1'] = $this->Postm->getUser($id);

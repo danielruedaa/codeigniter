@@ -1,3 +1,11 @@
+$(document).ready(function() {
+    $('._editar').click(function() {
+        var a = confirm('hola mundo')
+        return true;
+    });
+});
+
+
 addEventListener('load', inicializarEventos, false);
 
 function bienvenida() {
@@ -12,9 +20,7 @@ function msgb() {
 
         alert("borro registro");
         alert($buttonDelete['value']);
-
         //document.location.href = "send_editar?id=<?php echo $value['id'] ?>";
-
     } else {
 
     }
