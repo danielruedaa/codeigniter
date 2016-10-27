@@ -10,6 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="estiloCss/bootstrap-bootstrap.css"/>
+<script src="<?php echo base_url() ?>asset/js/funciones.js" ></script>
 <style type="text/css">
 /*escritorio*/
   @media(min-width: 1200px){body{color:green;}}
@@ -22,7 +23,7 @@
 
 
 </style>
-<title>Banco</title>
+<title>Usuario post</title>
 
 </head>
 <body>
@@ -31,68 +32,25 @@
 <h1>Bienvenido al sistema </h1>
 </div>
 
-
-<?php
-//include ('leerbd.php');
-
-?>
  <div class="container" id="general">
 <table class="table">
 
-<?php if (!empty($rows)): ?>
-
-<?php foreach ($rows as $key => $value) : ?>
-  <tr>
-
-    <td><?php echo $value['name'] ?></td>
-    <td><?php echo $value['pos'] ?></td>
-    <td><?php echo $value['fecha'] ?></td>
-    <td><?php echo $value['hora'] ?></td>
-
-   <td>
-<!--<a href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>"onclick="msge()">editar</a>-->
-<!--<input id="ocultob"  type="button" value="borrar" onclick="msgb()" />-->
-<!-- hago el control para hacer visible los botones-->
+  <?php if (!empty($query)): ?>
+  <?php foreach ($query->result() as $rows) : ?>
+    <tr>
+      <td><?php echo $rows->nombre ?></td>
+      <td><?php echo $rows->post ?></td>
+      <td><?php echo $rows->created ?></td>
+     <td>
 
 <input   type="button" value="editar" onclick="msge()" />
 <input   type="button" value="borrar" onclick="msgb()" />
-<!--
-<div id="ocultob" style='display:none';>
-<input   type="button" value="borrar" onclick="msgb()" />
-</div>
-<div id="ocultoe" style='display:none';>
-<input type="button" value="editar" onclick="msge()" />
-</div> -->
-    </td>
-
-<script language="javascript">
-// funcion para ocultar
-
-function msgb(){
-var b=confirm("Deseas borrar este registro?");
-if (b == true) {
-  document.location.href="phpBaseDatos/borrarCom.php?id=<?php echo $value['id'] ?>";
-} else {
-  // document.location.href="Pp.php";
-    }
-}
-function msge(){
-var e=confirm("Deseas editar este registro?");
-if (e == true) {
-  document.location.href="Ppeditarcom.php?id=<?php echo $value['id'] ?>";
-
-} else {
- //document.location.href="Pp.php";
-  }
-}
-</script>
-
-
-<?php endforeach; ?>
+<?php endforeach;
+echo $this->pagination->create_links();
+?>
 <tr>
 <ul>
-<li><a href = "Inicio.html">inicio</article></a></li>
-<li><a href = "post1.html">agregar post</a></li>
+<li><a href = "<?php echo site_url('post'); ?>">Inicio</a></li>
 </ul>
 </tr>
 

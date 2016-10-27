@@ -80,6 +80,27 @@ class Post extends CI_Controller
           $this->load->view('post/Crear');
     }
 
+    public function manager_administrador()
+    {
+        //cargar la pagina para crear la cuenta
+          $this->load->view('post/manager_administrador');
+    }
+    public function manager_editor()
+    {
+        //cargar la pagina para crear la cuenta
+          $this->load->view('post/manager_editor');
+    }
+    public function manager_usuario()
+    {
+        //cargar la pagina para crear la cuenta
+          $this->load->view('post/manager_usuario');
+    }
+    public function editar_usuario()
+    {
+        // code...
+      $this->load->view('post/editar_usuario');
+    }
+
         /**
          * [crearusuario description].
          *
@@ -161,13 +182,98 @@ class Post extends CI_Controller
 
     public function pagination()
     {
-        // code...
+        // code...http://10.0.0.59/codeigniter/index.php/post/pagination
       $this->load->library('pagination');
         $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination';
-        $config['total_rows'] = 5;
-        $config['per_page'] = 3;
-        $config['num_links'] = 3;
+        $config['per_page'] = 4;
+        $config['num_links'] = 5;
+        $config['total_rows'] = $this->db->get('usuario')->num_rows();
         $this->pagination->initialize($config);
-        echo $this->pagination->create_links();
+        $datap['query'] = $this->db->get('usuario', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('post/manager_administrador', $datap);
+    }
+    /**
+     * [paginationpost description].
+     *
+     * @return [type] [description]
+     */
+    public function paginationpost()
+    {
+        // code...http://127.0.0.1/codeigniter/index.php/post/pagination
+      $this->load->library('pagination');
+        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination/post';
+        $config['per_page'] = 4;
+        $config['num_links'] = 5;
+        $config['total_rows'] = $this->db->get('post')->num_rows();
+        $this->pagination->initialize($config);
+        $datap['query'] = $this->db->get('post', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('post/manager_usuario', $datap);
+    }
+    /**
+     * [send_editar description].
+     *
+     * @param [type] $dato_edicion [description]
+     *
+     * @return [type] [description]
+     */
+    public function send_editar($dato_edicion)
+    {
+        // code...
+      //envio un parametro y recoj el dato que llega por la url (el id)
+      $editUser['query_edicion'] = $this->Postm->getUser_edicion($dato_edicion);
+
+        echo '<pre>';
+        //print_r($editUser);
+        echo '</pre>';
+
+      //cargo la vista y mando el datos
+
+      $this->load->view('post/editar_usuario', $editUser);
+      //recivir los datos modificados por el form
+    }
+
+    public function send_editar_update()
+    {
+        // code...
+      $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
+        $this->form_validation->set_rules('rol', 'Cuenta', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('Password', 'Clave', 'trim|required|min_length[5]|max_length[20]');
+
+    // mensajes de validacion
+     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+        $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
+        $this->form_validation->set_message('min_length[3]', 'El campo %s debe tener mas de 3 caracteres');
+        $this->form_validation->set_message('valid_email', 'El campo %s debe ser un email correcto');
+        $data = array(
+           'id' => $this->input->post('id'),
+           'nombre' => $this->input->post('nombre'),
+           'telefono' => $this->input->post('telefono'),
+           'email' => $this->input->post('email'),
+           'rol' => $this->input->post('rol'),
+           'clave' => $this->input->post('Password'),
+           'login' => $this->input->post('login'),
+      );
+
+        if ($this->form_validation->run() == true) {
+            $datos['mensaje'] = 'Validación correcta';
+            //mando el dato al modelo para ingresar a la bd
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+            $this->Postm->update_user($data);
+        } else {
+            $datos['mensaje'] = 'Validación incorrecta';
+            $this->load->view('post/editar_usuario', $datos);
+        }
+//https://www.codeigniter.com/userguide2/database/active_record.html
+    }
+
+    public function send_borrar($id_borrar)
+    {
+        // code...
+      $this->Postm->getUser($dato_edicion);
     }
 }//finm
