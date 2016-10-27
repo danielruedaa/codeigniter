@@ -206,7 +206,7 @@ class Post extends CI_Controller
         $this->load->view('post/manager_usuario', $datap);
     }
 
-    public function send_editar($dato_edicion = 1)
+    public function send_editar($dato_edicion)
     {
         // code...
         $id = $_GET['id'];

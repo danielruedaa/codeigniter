@@ -29,6 +29,7 @@
 
 <?php foreach ($query->result() as $rows) : ?>
   <tr>
+    <td><?php echo $id = $rows->id ?></td>
     <td><?php echo $rows->nombre ?></td>
     <td><?php echo $rows->telefono ?></td>
     <td><?php echo $rows->email ?></td>
@@ -37,8 +38,22 @@
 
    <td>
 
-<input   type="button" value="editar" onclick="msge()" />
-<input   type="button" value="borrar" onclick="msgb()" />
+<?php
+echo anchor('/send_editar/'.$id, 'editar', 'title="editar_usuario"', 'onclick="msge"');
+?>
+
+<?php
+ $funcion = 'onClick="msgb()"';
+ $buttonDelete = array(
+    'name' => 'buttonDelete',
+    'value' => $id,
+);
+echo form_button($buttonDelete, 'borrar', $funcion, $id);
+?>
+
+
+<!--<input   type="button" value="editar" onclick="msge()" />
+<input   type="button" value="borrar" onclick="msgb()" />-->
     </td>
   </tr>
 <script language="javascript">
