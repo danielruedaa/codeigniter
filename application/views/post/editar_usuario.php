@@ -30,114 +30,87 @@
 <body>
 <div class="container" >
 <div class="starter-templeta">
-	<div class="container" >
-<div class="text-center">
-<h1>Editar usuario </h1>
-
-</div>
-<?php
-echo form_open('post/send_editar_update'); // asignar la ruta para mandar los datos por post
-?>
+<div class="container" >
+<div class="text-center"><h1>Editar usuario </h1></div>
 
 
-
-<h2 class="text-center" >Editar</h2>
 <div class="container" >
 <div class="text-center">
-<table id="prueba"  class="table">
+<table  class="table">
+
   <?php if (!empty($query_edicion)):
     echo '<pre>';
-    print_r($query_edicion);
-    echo '</pre>';
-     ?>
-  <?php foreach ($query_edicion as $key => $value) : ?>
+     print_r($query_edicion);
+     echo '</pre>';
+    ?>
+
+  <?php     echo form_open('post/send_editar_update'); ?>
+<?php foreach ($query_edicion as $key => $value) : ?>
 <tr>
 <td class="text-left" >id : </td>
 <td class="text-left" >
-<input type="text" name= "id" value= "<?php echo $value['id'] ?>" placeholder="5" readonly="readonly"> </td><!--   -->
+<input type="text" name= "id"              value= " " placeholder="5" readonly="readonly"> </td>
 </tr>
 <tr>
-<td class="text-left" >nombre completo : </td>
-<td class="text-left" >
-<input type="text" name= "Nombre" value= "<?php echo $value['nombre'] ?>" placeholder="Daniel Rueda" required="required">           </td><!--   -->
-</tr>
-<td class="text-left" >login : </td>
-<td class="text-left" >
-<input type="text" name= "login" value= "<?php echo $value['login'] ?>" placeholder="shofry" required="required">              </td><!--   -->
-</tr>
-<tr>
-<td class="text-left" >telefono: </td>
-<td class="text-left" ><input type="text" name= "telefono" value= "<?php echo $value['telefono'] ?>" placeholder="3193789277" required="required"> </td>  <!--   -->
-</tr>
-<td class="text-left" >email: </td>
-<td class="text-left" ><input type="text" name= "email" value= "<?php echo $value['email'] ?>" placeholder="carlos@hotmail.com" required="required"> </td>  <!--   -->
-</tr>
-<td class="text-left" >cambiar rol: </td>
-<td class="text-left" ><select name="rol" >
-<option> <?php echo $value['rol'] ?> </option>
-<option>Administrador</option>
-<option>Editor</option>
-<option>Usuario</option>
-</select>
-</td>
-</tr>
-<td class="text-left" >clave:</td>
-<td class="text-left" ><input type="password" name= "Password"  value= "<?php echo $value['clave'] ?>" placeholder="*********"  >  </td> <!--   -->
-</tr>
-<tr>
-<td class="text-left" >
-nueva clave:</td>
-<td class="text-left" ><input type="password" name= "rPassword" value= "<?php echo $value['clave'] ?>" placeholder="*********" >    </td> <!--   -->
-</tr>
-<tr>
-            <td class="text-left" ><a href = "Inicio.html">inicio</a>
-             <!-- poner un boton de enviar   -->
-</td>
-<td class="text-left" > <input type="submit" value="Editar" onclick="msge()"> </td>
+  <td class="text-left" >nombre completo : </td>
+  <td class="text-left" >
+  <input type="text" name= "Nombre"        value= "" placeholder="Daniel Rueda" required="required">           </td>
+  </tr>
+  <td class="text-left" >login : </td>
+  <td class="text-left" >
+  <input type="text" name= "login"         value= "" placeholder="shofry" required="required">              </td>
+  </tr>
+  <tr>
+  <td class="text-left" >telefono: </td>
+  <td class="text-left" >
+  <input type="text" name= "telefono"      value= "" placeholder="3193789277" required="required"> </td>
+  </tr>
+  <td class="text-left" >email: </td>
+  <td class="text-left" >
+  <input type="text" name= "email"         value= "" placeholder="carlos@hotmail.com" required="required"> </td>
+  </tr>
+  <td class="text-left" >cambiar rol: </td>
+  <td class="text-left" ><select name="rol" >
+    <option>  </option>
+  <option>Administrador</option>
+  <option>Editor</option>
+  <option>Usuario</option>
+  </select>
+  </td>
+  </tr>
+  <td class="text-left" >clave:</td>
+  <td class="text-left" >
+  <input type="password" name= "Password"  value= "" placeholder="*********"  >  </td>
+  </tr>
+  <tr>
+  <td class="text-left">nueva clave:</td>
+  <td class="text-left" >
+  <input type="password" name= "rPassword" value= "" placeholder="*********" ></td>
+  </tr>
+  <tr>
+
+<td class="text-left" > <input type="submit" value="Editar" > </td>
+
 
 <?php endforeach; ?>
-<?php else : ?>
-<?php endif; ?>
-<?php
 
-echo form_close();
-echo validation_errors();
+<?php endif; ?>
+
+<?php echo form_close();
+//echo validation_errors();
 ?>
-<h2><?php if (isset($mensaje)) {
-    echo $mensaje;
-} ?></h2>
 
 
 </table>
+<h2> fin codigo
+  <?php // if (isset($mensaje)) {    echo $mensaje;}?></h2>
+
+
+
 </div>
 </div>
-</FORM>
 </body>
 
-<script language="javascript">
-function msgb(){
-
-var b=confirm("Deseas borrar este registro?");
-
-function msge(){
-var e=confirm("Deseas editar este registro?");
-if (e == true) {
-} else {
- document.location.href="Pp.php";
-
-
-}
-}
-
-
-</script>
-
-
-
-
-
-
-</body>
 
 
 
