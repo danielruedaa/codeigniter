@@ -49,4 +49,15 @@ class Postm extends CI_Model
         // code...
     return $this->db->insert('usuarios', $data);
     }
+
+    public function update_user($array)
+    {
+        // code...
+        $update = $array;
+        echo '<pre>';
+        print_r($update);
+        echo '</pre>';
+        $this->db->where('id', $update['id']);
+        $this->db->update('usuario', $update);
+    }
 }//fin

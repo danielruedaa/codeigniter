@@ -23,6 +23,7 @@
   @media(max-width: 480px){body{color:yellow;}}
 
 </style>
+<div class="container" >
 <title>Editar Usuario</title>
 
 </head>
@@ -31,12 +32,17 @@
 
   <?php if (!empty($query_edicion)):
     echo '<pre>';
-     print_r($query_edicion);
-     echo '</pre>';
+    //print_r($query_edicion);
+    echo '</pre>';
     ?>
 <?php  echo form_open('post/send_editar_update'); ?>
 
 <table  class="table">
+  <tr>
+<td class="text-left" >id : </td>
+<td class="text-left" >
+<input type="text" name= "id" value= "<?php echo $query_edicion['id'] ?>" placeholder="5" readonly="readonly"> </td><!--   -->
+</tr>
     <td  >nombre completo : </td>
     <td  >
     <input type="text" name= "nombre"        value= "<?php echo $query_edicion['nombre']   ?>" placeholder="Daniel Rueda" required="required">           </td>
@@ -65,18 +71,27 @@
     </tr>
     <td  >clave:</td>
     <td  >
-    <input type="password" name= "Password"  value= "" placeholder="*********"  >  </td>
+    <input type="password" name= "Password"  value= "<?php echo $query_edicion['clave']    ?>" placeholder="*********" readonly="readonly" >  </td>
+    </tr>
+    <td  >antigua clave:</td>
+    <td  >
+    <input type="password" name= "comparar"  value= "" placeholder="*********" required="required" >  </td>
     </tr>
     <tr>
     <td >nueva clave:</td>
     <td  >
-    <input type="password" name= "rPassword" value= "" placeholder="*********" ></td>
+    <input type="password" name= "nueva_clave" value= "" placeholder="*********" ></td>
     </tr>
-    <tr>
-    <td class="text-left" > <input type="submit" value="Editar" > </td>
+        <td><a href="<?php echo site_url('post'); ?>"><samll>Regresar</samll> </a> </td>
+    <td > <input type="submit" value="Editar" > </td>
 </table>
 <?php else : ?>
-<?php endif; ?> 
-<?php echo form_close(); ?>
+<?php endif; ?>
+<?php echo form_close();
+echo validation_errors();
+?>
+<h2><?php if (isset($mensaje)) {
+    echo $mensaje;
+} ?></h2>
 </body>
 </html>

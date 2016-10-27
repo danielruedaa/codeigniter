@@ -221,21 +221,15 @@ class Post extends CI_Controller
         // code...
       //envio un parametro y recoj el dato que llega por la url (el id)
       $editUser['query_edicion'] = $this->Postm->getUser_edicion($dato_edicion);
-      //$editUser = $this->Postm->getUser_edicion($dato_edicion);
 
         echo '<pre>';
-        print_r($editUser);
+        //print_r($editUser);
         echo '</pre>';
 
       //cargo la vista y mando el datos
+
       $this->load->view('post/editar_usuario', $editUser);
       //recivir los datos modificados por el form
-    }
-
-    public function send_borrar($id_borrar)
-    {
-        // code...
-      $this->Postm->getUser($dato_edicion);
     }
 
     public function send_editar_update()
@@ -254,6 +248,7 @@ class Post extends CI_Controller
         $this->form_validation->set_message('min_length[3]', 'El campo %s debe tener mas de 3 caracteres');
         $this->form_validation->set_message('valid_email', 'El campo %s debe ser un email correcto');
         $data = array(
+           'id' => $this->input->post('id'),
            'nombre' => $this->input->post('nombre'),
            'telefono' => $this->input->post('telefono'),
            'email' => $this->input->post('email'),
@@ -264,17 +259,21 @@ class Post extends CI_Controller
 
         if ($this->form_validation->run() == true) {
             $datos['mensaje'] = 'Validación correcta';
-            $template = strtolower($data['rol']);
-            if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
-                $this->load->view('post/manager_'.$template);
-            } else {
-                show_404();
-            }
+            //mando el dato al modelo para ingresar a la bd
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+            $this->Postm->update_user($data);
         } else {
             $datos['mensaje'] = 'Validación incorrecta';
-            $this->load->view('post/Crear', $datos);
+            $this->load->view('post/editar_usuario', $datos);
         }
+//https://www.codeigniter.com/userguide2/database/active_record.html
+    }
 
-        return $this->db->insert('usuario', $data);
+    public function send_borrar($id_borrar)
+    {
+        // code...
+      $this->Postm->getUser($dato_edicion);
     }
 }//finm
