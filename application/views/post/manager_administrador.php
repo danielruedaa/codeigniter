@@ -3,26 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<!--<link rel="stylesheet" type="text/css" href="estiloCss/hojaEstilo.css"/>-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" type="text/css" href="estiloCss/bootstrap-responsive.css"/>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="estiloCss/bootstrap-bootstrap.css"/>
 <script src="<?php echo base_url() ?>asset/js/funciones.js" ></script>
-<style type="text/css">
-/*escritorio*/
-  @media(min-width: 1200px){body{color:gray;}}
-  /*table escritorio pequeño*/
-  @media(min-width: 768px)and(max-width: 979px){body{color:green;}}
-  /*tablet o smartphone*/
-  @media(max-width: 767px){body{color:blue;}}
-  /*smartphone*/
-  @media(max-width: 480px){body{color:yellow;}}
+<script src="<?php echo base_url() ?>asset/css/hojaEstilo.css" ></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" ></script>
 
-
-</style>
 <title>manager</title>
 
 </head>
