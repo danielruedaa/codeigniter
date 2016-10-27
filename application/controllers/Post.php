@@ -192,7 +192,11 @@ class Post extends CI_Controller
         $datap['query'] = $this->db->get('usuario', $config['per_page'], $this->uri->segment(3));
         $this->load->view('post/manager_administrador', $datap);
     }
-
+    /**
+     * [paginationpost description].
+     *
+     * @return [type] [description]
+     */
     public function paginationpost()
     {
         // code...http://127.0.0.1/codeigniter/index.php/post/pagination
@@ -205,19 +209,26 @@ class Post extends CI_Controller
         $datap['query'] = $this->db->get('post', $config['per_page'], $this->uri->segment(3));
         $this->load->view('post/manager_usuario', $datap);
     }
-
+    /**
+     * [send_editar description].
+     *
+     * @param [type] $dato_edicion [description]
+     *
+     * @return [type] [description]
+     */
     public function send_editar($dato_edicion)
     {
         // code...
       //envio un parametro y recoj el dato que llega por la url (el id)
-      $infoUser['query_edicion'] = $this->Postm->getUser_edicion($dato_edicion);
+      $editUser['query_edicion'] = $this->Postm->getUser_edicion($dato_edicion);
+      //$editUser = $this->Postm->getUser_edicion($dato_edicion);
 
         echo '<pre>';
-        print_r($infoUser);
+        print_r($editUser);
         echo '</pre>';
 
       //cargo la vista y mando el datos
-      $this->load->view('post/editar_usuario', $infoUser);
+      $this->load->view('post/editar_usuario', $editUser);
       //recivir los datos modificados por el form
     }
 

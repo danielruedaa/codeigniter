@@ -2,53 +2,6 @@
 
 /* CSS Document  dentro de este puedo definir los estilos para la pagina principal*/
 
-@media(min-width: 1200px) {
-    body {
-        color: gray;
-    }
-}
-
-
-/*table escritorio pequeño*/
-
-@media(min-width: 768px)and(max-width: 979px) {
-    body {
-        color: green;
-    }
-}
-
-
-/*tablet o smartphone*/
-
-@media(max-width: 767px) {
-    body {
-        color: blue;
-    }
-}
-
-
-/*smartphone*/
-
-@media(max-width: 480px) {
-    body {
-        color: yellow;
-    }
-}
-
-@media (max-width: 500px) {
-    /*#general{margin:auto; margin-top:5px;width:200px; height:200px;  background:#0CF}*/
-    .general {
-        position: absolute;
-        width: 200px;
-        height: 200px;
-        left: 100px;
-        top:
-    }
-}
-
-
-/*responsive*/
-
 h1 {
     color: #00C;
     alignment-adjust: central;

@@ -22,97 +22,61 @@
   /*smartphone*/
   @media(max-width: 480px){body{color:yellow;}}
 
-
 </style>
 <title>Editar Usuario</title>
 
 </head>
 <body>
-<div class="container" >
-<div class="starter-templeta">
-<div class="container" >
-<div class="text-center"><h1>Editar usuario </h1></div>
-
-
-<div class="container" >
-<div class="text-center">
-<table  class="table">
+<h1>Editar usuario </h1></div>
 
   <?php if (!empty($query_edicion)):
     echo '<pre>';
      print_r($query_edicion);
      echo '</pre>';
     ?>
+<?php  echo form_open('post/send_editar_update'); ?>
 
-  <?php     echo form_open('post/send_editar_update'); ?>
-<?php foreach ($query_edicion as $key => $value) : ?>
-<tr>
-<td class="text-left" >id : </td>
-<td class="text-left" >
-<input type="text" name= "id"              value= " " placeholder="5" readonly="readonly"> </td>
-</tr>
-<tr>
-  <td class="text-left" >nombre completo : </td>
-  <td class="text-left" >
-  <input type="text" name= "Nombre"        value= "" placeholder="Daniel Rueda" required="required">           </td>
-  </tr>
-  <td class="text-left" >login : </td>
-  <td class="text-left" >
-  <input type="text" name= "login"         value= "" placeholder="shofry" required="required">              </td>
-  </tr>
-  <tr>
-  <td class="text-left" >telefono: </td>
-  <td class="text-left" >
-  <input type="text" name= "telefono"      value= "" placeholder="3193789277" required="required"> </td>
-  </tr>
-  <td class="text-left" >email: </td>
-  <td class="text-left" >
-  <input type="text" name= "email"         value= "" placeholder="carlos@hotmail.com" required="required"> </td>
-  </tr>
-  <td class="text-left" >cambiar rol: </td>
-  <td class="text-left" ><select name="rol" >
-    <option>  </option>
-  <option>Administrador</option>
-  <option>Editor</option>
-  <option>Usuario</option>
-  </select>
-  </td>
-  </tr>
-  <td class="text-left" >clave:</td>
-  <td class="text-left" >
-  <input type="password" name= "Password"  value= "" placeholder="*********"  >  </td>
-  </tr>
-  <tr>
-  <td class="text-left">nueva clave:</td>
-  <td class="text-left" >
-  <input type="password" name= "rPassword" value= "" placeholder="*********" ></td>
-  </tr>
-  <tr>
-
-<td class="text-left" > <input type="submit" value="Editar" > </td>
-
-
-<?php endforeach; ?>
-
-<?php endif; ?>
-
-<?php echo form_close();
-//echo validation_errors();
-?>
-
-
+<table  class="table">
+    <td  >nombre completo : </td>
+    <td  >
+    <input type="text" name= "nombre"        value= "<?php echo $query_edicion['nombre']   ?>" placeholder="Daniel Rueda" required="required">           </td>
+    </tr>
+    <td  >login : </td>
+    <td  >
+    <input type="text" name= "login"         value= "<?php echo $query_edicion['login']    ?>" placeholder="shofry" required="required">              </td>
+    </tr>
+    <tr>
+    <td  >telefono: </td>
+    <td  >
+    <input type="text" name= "telefono"      value= "<?php echo $query_edicion['telefono'] ?>" placeholder="3193789277" required="required"> </td>
+    </tr>
+    <td  >email: </td>
+    <td  >
+    <input type="text" name= "email"         value= "<?php echo $query_edicion['email']    ?>" placeholder="carlos@hotmail.com" required="required"> </td>
+    </tr>
+    <td  >cambiar rol: </td>
+    <td  ><select name="rol" >
+      <option><?php echo $query_edicion['rol'] ?> </option>
+    <option>Administrador</option>
+    <option>Editor</option>
+    <option>Usuario</option>
+    </select>
+    </td>
+    </tr>
+    <td  >clave:</td>
+    <td  >
+    <input type="password" name= "Password"  value= "" placeholder="*********"  >  </td>
+    </tr>
+    <tr>
+    <td >nueva clave:</td>
+    <td  >
+    <input type="password" name= "rPassword" value= "" placeholder="*********" ></td>
+    </tr>
+    <tr>
+    <td class="text-left" > <input type="submit" value="Editar" > </td>
 </table>
-<h2> fin codigo
-  <?php // if (isset($mensaje)) {    echo $mensaje;}?></h2>
-
-
-
-</div>
-</div>
+<?php else : ?>
+<?php endif; ?> 
+<?php echo form_close(); ?>
 </body>
-
-
-
-
-
 </html>

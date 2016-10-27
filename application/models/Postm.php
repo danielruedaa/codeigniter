@@ -31,7 +31,7 @@ class Postm extends CI_Model
      *
      * @return [type] [description]
      */
-    public function getUser_edicion($dato_edicion = 1)
+    public function getUser_edicion($dato_edicion)
     {
         $query = $this->db->get_where('usuario', array('id' => $dato_edicion));
 
