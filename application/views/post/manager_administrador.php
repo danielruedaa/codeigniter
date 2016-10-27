@@ -39,14 +39,13 @@
 
 <?php foreach ($query->result() as $rows) : ?>
   <tr>
-
     <td><?php echo $rows->nombre ?></td>
     <td><?php echo $rows->telefono ?></td>
     <td><?php echo $rows->email ?></td>
     <td><?php echo $rows->rol ?></td>
     <td><?php echo $rows->clave ?></td>
     <td><?php echo $rows->login ?></td>
-
+    
    <td>
 
 <input   type="button" value="editar" onclick="msge()" />
@@ -90,9 +89,9 @@ echo $this->pagination->create_links();
 </tr>
 </table>
 <ul>
-  <li><a href = "Inicio.html">Inicio</a></li>
-  <li><a href = "post1.html">Crear post</a></li>
-  <li><a href = "leer.php">Ver el post</a></li>
+  <li><a href = "<?php echo site_url('post'); ?>">Inicio</a></li>
+  <li><a href = "<?php echo site_url('post/manager_editor'); ?>">Crear post</a></li>
+  <li><a href = "<?php echo site_url('post/manager_usuario'); ?>">Ver el post</a></li>
 
 </ul>
 </div>

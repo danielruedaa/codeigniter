@@ -80,6 +80,23 @@ class Post extends CI_Controller
           $this->load->view('post/Crear');
     }
 
+    public function manager_administrador()
+    {
+        //cargar la pagina para crear la cuenta
+          $this->load->view('post/manager_administrador');
+    }
+    public function manager_editor()
+    {
+        //cargar la pagina para crear la cuenta
+          $this->load->view('post/manager_editor');
+    }
+    public function manager_usuario()
+    {
+        //cargar la pagina para crear la cuenta
+          $this->load->view('post/manager_usuario');
+    }
+
+
         /**
          * [crearusuario description].
          *
@@ -164,11 +181,27 @@ class Post extends CI_Controller
         // code...http://10.0.0.59/codeigniter/index.php/post/pagination
       $this->load->library('pagination');
         $config['base_url'] = 'http://127.0.0.1/codeigniter/index.php/post/pagination';
-        $config['per_page'] = 3;
-        $config['num_links'] = 3;
+        $config['per_page'] = 4;
+        $config['num_links'] = 5;
         $config['total_rows'] = $this->db->get('usuario')->num_rows();
         $this->pagination->initialize($config);
-        $rows['query'] = $this->db->get('usuario', $config['per_page'], $this->uri->segment(3));
-        $this->load->view('post/manager_administrador', $rows);
+        $datap['query'] = $this->db->get('usuario', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('post/manager_administrador', $datap);
     }
+
+    public function paginationpost()
+    {
+        // code...http://10.0.0.59/codeigniter/index.php/post/pagination
+      $this->load->library('pagination');
+        $config['base_url'] = 'http://127.0.0.1/codeigniter/index.php/post/pagination/post';
+        $config['per_page'] = 4;
+        $config['num_links'] = 5;
+        $config['total_rows'] = $this->db->get('post')->num_rows();
+        $this->pagination->initialize($config);
+        $datap['query'] = $this->db->get('post', $config['per_page'], $this->uri->segment(3));
+        $this->load->view('post/manager_usuario', $datap);
+    }
+
+
+
 }//finm

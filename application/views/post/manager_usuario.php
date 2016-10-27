@@ -31,26 +31,17 @@
 <h1>Bienvenido al sistema </h1>
 </div>
 
-
-<?php
-//include ('leerbd.php');
-
-?>
  <div class="container" id="general">
 <table class="table">
+  <?php if (!empty($query)): ?>
 
-<?php if (!empty($rows)): ?>
-
-<?php foreach ($rows as $key => $value) : ?>
-  <tr>
-
-    <td><?php echo $value['name'] ?></td>
-    <td><?php echo $value['pos'] ?></td>
-    <td><?php echo $value['fecha'] ?></td>
-    <td><?php echo $value['hora'] ?></td>
-
-   <td>
-<!--<a href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>"onclick="msge()">editar</a>-->
+  <?php foreach ($query->result() as $rows) : ?>
+    <tr>
+      <td><?php echo $rows->nombre ?></td>
+      <td><?php echo $rows->post ?></td>
+      <td><?php echo $rows->created ?></td>
+     <td>
+       <!--<a href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>"onclick="msge()">editar</a>-->
 <!--<input id="ocultob"  type="button" value="borrar" onclick="msgb()" />-->
 <!-- hago el control para hacer visible los botones-->
 
