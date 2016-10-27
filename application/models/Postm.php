@@ -2,12 +2,21 @@
 
 class Postm extends CI_Model
 {
+    /**
+     * [__construct description].
+     */
     public function __construct()
     {
         // code...
       $this->load->database();
     }
-
+    /**
+     * [getUser description].
+     *
+     * @param [type] $dato1 [description]
+     *
+     * @return [type] [description]
+     */
     public function getUser($dato1)
     {
         // code...
@@ -15,14 +24,26 @@ class Postm extends CI_Model
 
         return $query->row_array();
     }
-
-    public function getUser_edicion($dato_edicion=1)
+    /**
+     * [getUser_edicion description].
+     *
+     * @param int $dato_edicion [description]
+     *
+     * @return [type] [description]
+     */
+    public function getUser_edicion($dato_edicion = 1)
     {
-      $query = $this->db->get_where('usuario', array('id' => $dato_edicion));
+        $query = $this->db->get_where('usuario', array('id' => $dato_edicion));
 
-          return $query->row_array();
+        return $query->row_array();
     }
-
+    /**
+     * [crearusuario description].
+     *
+     * @param [type] $array [description]
+     *
+     * @return [type] [description]
+     */
     public function crearusuario($array)
     {
         // code...

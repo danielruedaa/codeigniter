@@ -43,15 +43,19 @@ echo anchor('post/send_editar/'.$id, 'editar', array('class' => '_editar'));
 ?>
 
 <?php
+echo anchor('post/send_borrar/'.$id, 'borrar', array('class' => '_borrar'));
+?>
+
+
+<?php
  $funcion = 'onClick="msgb()"';
  $buttonDelete = array(
     'name' => 'buttonDelete',
     'value' => $id,
 );
-echo form_button($buttonDelete, 'borrar', $funcion, $id);
+//pendiente hacerlo con el boton
+//echo form_button($buttonDelete, 'borrar', $funcion);
 ?>
-<!--<input   type="button" value="editar" onclick="msge()" />
-<input   type="button" value="borrar" onclick="msgb()" />-->
     </td>
   </tr>
 <script language="javascript">

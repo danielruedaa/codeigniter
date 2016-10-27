@@ -1,38 +1,23 @@
 $(document).ready(function() {
     $('._editar').click(function() {
-        var a = confirm('hola mundo')
-        return true;
+        var e = confirm("Deseas editar este registro?");
+        if (e == true) {
+            // por el url del post se pasa el dato
+
+        } else {
+            //document.location.href="Pp.php";
+        }
     });
 });
 
+$(document).ready(function() {
+    $('._borrar').click(function() {
+        var b = confirm("Deseas borrar este registro?");
+        if (b == true) {
+            // por el url del post se pasa el dato
 
-addEventListener('load', inicializarEventos, false);
-
-function bienvenida() {
-    alert("Ingreso satisfactoriamente")
-}
-
-
-
-function msgb() {
-    var b = confirm("Deseas borrar este registro?");
-    if (b == true) {
-
-        alert("borro registro");
-        alert($buttonDelete['value']);
-        //document.location.href = "send_editar?id=<?php echo $value['id'] ?>";
-    } else {
-
-    }
-}
-
-
-function msge() {
-    var e = confirm("Deseas editar este registro?");
-    if (e == true) {
-        //  document.location.href = "send_editar.php?id=<?php echo $value['id'] ?>";
-
-    } else {
-        //document.location.href="Pp.php";
-    }
-}
+        } else {
+            //document.location.href="Pp.php";
+        }
+    });
+});

@@ -38,23 +38,28 @@
 <?php
 echo form_open('post/send_editar_update'); // asignar la ruta para mandar los datos por post
 ?>
-<?php if (!empty($query1)): ?>
-<?php foreach ($query1->result() as $value) : ?>
+
 
 
 <h2 class="text-center" >Editar</h2>
 <div class="container" >
 <div class="text-center">
 <table id="prueba"  class="table">
+  <?php if (!empty($query_edicion)):
+    echo '<pre>';
+    print_r($query_edicion);
+    echo '</pre>';
+     ?>
+  <?php foreach ($query_edicion as $key => $value) : ?>
 <tr>
 <td class="text-left" >id : </td>
 <td class="text-left" >
-<input type="text" name= "id" value= "<?php echo $value->id ?>" placeholder="5" readonly="readonly"> </td><!--   -->
+<input type="text" name= "id" value= "<?php echo $value['id'] ?>" placeholder="5" readonly="readonly"> </td><!--   -->
 </tr>
 <tr>
 <td class="text-left" >nombre completo : </td>
 <td class="text-left" >
-<input type="text" name= "Nombre" value= "<?php echo $value->name ?>" placeholder="Daniel Rueda" required="required">           </td><!--   -->
+<input type="text" name= "Nombre" value= "<?php echo $value['nombre'] ?>" placeholder="Daniel Rueda" required="required">           </td><!--   -->
 </tr>
 <td class="text-left" >login : </td>
 <td class="text-left" >

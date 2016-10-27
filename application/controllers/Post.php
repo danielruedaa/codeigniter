@@ -209,15 +209,24 @@ class Post extends CI_Controller
     public function send_editar($dato_edicion)
     {
         // code...
-        echo $dato_edicion;
-        die();
+      //envio un parametro y recoj el dato que llega por la url (el id)
+      $infoUser['query_edicion'] = $this->Postm->getUser_edicion($dato_edicion);
 
-      //envio un parametro y recoj el dato
-      $infoUser['query1'] = $this->Postm->getUser($id);
+        echo '<pre>';
+        print_r($infoUser);
+        echo '</pre>';
+
       //cargo la vista y mando el datos
       $this->load->view('post/editar_usuario', $infoUser);
       //recivir los datos modificados por el form
     }
+
+    public function send_borrar($id_borrar)
+    {
+        // code...
+      $this->Postm->getUser($dato_edicion);
+    }
+
     public function send_editar_update()
     {
         // code...
