@@ -7,9 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="estiloCss/bootstrap-responsive.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="estiloCss/bootstrap-bootstrap.css"/>
+<script src="<?php echo base_url() ?>asset/js/funciones.js" ></script>
 <style type="text/css">
 /*escritorio*/
   @media(min-width: 1200px){body{color:gray;}}
@@ -22,7 +23,7 @@
 
 
 </style>
-<title>Banco</title>
+<title>manager</title>
 
 </head>
 <body>
@@ -45,7 +46,7 @@
     <td><?php echo $rows->rol ?></td>
     <td><?php echo $rows->clave ?></td>
     <td><?php echo $rows->login ?></td>
-    
+
    <td>
 
 <input   type="button" value="editar" onclick="msge()" />
@@ -53,27 +54,7 @@
     </td>
   </tr>
 <script language="javascript">
-// funcion para ocultar
 
-function msgb(){
-var b=confirm("Deseas borrar este registro?");
-if (b == true) {
-   document.location.href="phpBaseDatos/borrar.php?id=<?php echo $value['id'] ?>";
-   alert(" registro Borrado  ");
-} else {
-  // document.location.href="Pp.php";
-    }
-}
-function msge(){
-var e=confirm("Deseas editar este registro?");
-if (e == true) {
-    //document.location.href="phpBaseDatos/editar.php?id=<?php echo $value['id'] ?>";
-    document.location.href="Ppeditar.php?id=<?php echo $value['id'] ?>";
-
-} else {
- //document.location.href="Pp.php";
-  }
-}
 </script>
 
 

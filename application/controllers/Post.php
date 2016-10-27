@@ -95,6 +95,11 @@ class Post extends CI_Controller
         //cargar la pagina para crear la cuenta
           $this->load->view('post/manager_usuario');
     }
+    public function editar_usuario()
+    {
+      # code...
+      $this->load->view('post/editar_usuario');
+    }
 
 
         /**
@@ -202,6 +207,54 @@ class Post extends CI_Controller
         $this->load->view('post/manager_usuario', $datap);
     }
 
+    public function send_editar($dato_edicion=1)
+    {
+      # code...
+      //envio un parametro y recoj el dato
+      $infoUser['query1'] = $this->Postm->getUser($dato_edicion);
+      //cargo la vista y mando el datos
+      $this->load->view('post/editar_usuario', $infoUser);
+      //recivir los datos modificados por el form
+    }
+    public function send_editar_update()
+    {
+      # code...
+      $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[5]|max_length[20]');
+      $this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[5]|max_length[20]');
+      $this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|min_length[5]|max_length[20]');
+      $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
+      $this->form_validation->set_rules('rol', 'Cuenta', 'trim|required|min_length[5]|max_length[20]');
+      $this->form_validation->set_rules('Password', 'Clave', 'trim|required|min_length[5]|max_length[20]');
+
+    // mensajes de validacion
+     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+      $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
+      $this->form_validation->set_message('min_length[3]', 'El campo %s debe tener mas de 3 caracteres');
+      $this->form_validation->set_message('valid_email', 'El campo %s debe ser un email correcto');
+      $data = array(
+           'nombre' => $this->input->post('nombre'),
+           'telefono' => $this->input->post('telefono'),
+           'email' => $this->input->post('email'),
+           'rol' => $this->input->post('rol'),
+           'clave' => $this->input->post('Password'),
+           'login' => $this->input->post('login'),
+      );
+
+      if ($this->form_validation->run() == true) {
+          $datos['mensaje'] = 'Validación correcta';
+          $template = strtolower($data['rol']);
+          if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
+              $this->load->view('post/manager_'.$template);
+          } else {
+              show_404();
+          }
+      } else {
+          $datos['mensaje'] = 'Validación incorrecta';
+          $this->load->view('post/Crear', $datos);
+      }
+
+      return $this->db->insert('usuario', $data);
+      }
 
 
 }//finm

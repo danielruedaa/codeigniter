@@ -79,7 +79,9 @@ if (e == true) {
 </script>
 
 
-<?php endforeach; ?>
+<?php endforeach;
+echo $this->pagination->create_links();
+?>
 <tr>
 <ul>
 <li><a href = "Inicio.html">inicio</article></a></li>
