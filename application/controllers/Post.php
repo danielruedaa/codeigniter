@@ -161,9 +161,9 @@ class Post extends CI_Controller
 
     public function pagination()
     {
-        // code...
+        // code...http://10.0.0.59/codeigniter/index.php/post/pagination
       $this->load->library('pagination');
-        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination';
+        $config['base_url'] = 'http://127.0.0.1/codeigniter/index.php/post/pagination';
         $config['per_page'] = 3;
         $config['num_links'] = 3;
         $config['total_rows'] = $this->db->get('usuario')->num_rows();

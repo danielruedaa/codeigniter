@@ -35,15 +35,18 @@
 <table id="prueba"  class="table">
 <div class="text-center">
 
-<?php if (!empty($rows)): ?>
+<?php if (!empty($query)): ?>
 
-<?php foreach ($rows as $key => $value) : ?>
+<?php foreach ($query->result() as $rows) : ?>
   <tr>
 
-    <td><?php echo $value['name'] ?></td>
-    <td><?php echo $value['login'] ?></td>
-    <td><?php echo $value['rol'] ?></td>
-    <td><?php echo $value['email'] ?></td>
+    <td><?php echo $rows->nombre ?></td>
+    <td><?php echo $rows->telefono ?></td>
+    <td><?php echo $rows->email ?></td>
+    <td><?php echo $rows->rol ?></td>
+    <td><?php echo $rows->clave ?></td>
+    <td><?php echo $rows->login ?></td>
+
    <td>
 
 <input   type="button" value="editar" onclick="msge()" />
