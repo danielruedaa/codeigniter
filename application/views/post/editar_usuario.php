@@ -35,13 +35,13 @@
 <h1>Editar usuario </h1>
 
 </div>
-
-<?php if(!empty($query1)): ?>
+<?php
+echo form_open('post/send_editar_update'); // asignar la ruta para mandar los datos por post
+?>
+<?php if (!empty($query1)): ?>
 <?php foreach ($query1->result() as $value) : ?>
 
-  <?php
-  echo form_open('post/send_editar_update'); // asignar la ruta para mandar los datos por post
-  ?>
+
 <h2 class="text-center" >Editar</h2>
 <div class="container" >
 <div class="text-center">

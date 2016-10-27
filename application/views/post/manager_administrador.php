@@ -44,7 +44,6 @@
     <td><?php echo $rows->telefono ?></td>
     <td><?php echo $rows->email ?></td>
     <td><?php echo $rows->rol ?></td>
-    <td><?php echo $rows->clave ?></td>
     <td><?php echo $rows->login ?></td>
 
    <td>
@@ -57,14 +56,10 @@
 
 </script>
 
-
 <?php endforeach;
 echo $this->pagination->create_links();
  ?>
-<!--   -->
-
 <?php else : ?>
-
 <?php endif; ?>
 
 </tr>

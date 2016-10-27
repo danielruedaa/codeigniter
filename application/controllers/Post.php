@@ -97,10 +97,9 @@ class Post extends CI_Controller
     }
     public function editar_usuario()
     {
-      # code...
+        // code...
       $this->load->view('post/editar_usuario');
     }
-
 
         /**
          * [crearusuario description].
@@ -185,7 +184,7 @@ class Post extends CI_Controller
     {
         // code...http://10.0.0.59/codeigniter/index.php/post/pagination
       $this->load->library('pagination');
-        $config['base_url'] = 'http://127.0.0.1/codeigniter/index.php/post/pagination';
+        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination';
         $config['per_page'] = 4;
         $config['num_links'] = 5;
         $config['total_rows'] = $this->db->get('usuario')->num_rows();
@@ -196,9 +195,9 @@ class Post extends CI_Controller
 
     public function paginationpost()
     {
-        // code...http://10.0.0.59/codeigniter/index.php/post/pagination
+        // code...http://127.0.0.1/codeigniter/index.php/post/pagination
       $this->load->library('pagination');
-        $config['base_url'] = 'http://127.0.0.1/codeigniter/index.php/post/pagination/post';
+        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination/post';
         $config['per_page'] = 4;
         $config['num_links'] = 5;
         $config['total_rows'] = $this->db->get('post')->num_rows();
@@ -207,9 +206,9 @@ class Post extends CI_Controller
         $this->load->view('post/manager_usuario', $datap);
     }
 
-    public function send_editar($dato_edicion=1)
+    public function send_editar($dato_edicion = 1)
     {
-      # code...
+        // code...
       //envio un parametro y recoj el dato
       $infoUser['query1'] = $this->Postm->getUser($dato_edicion);
       //cargo la vista y mando el datos
@@ -218,20 +217,20 @@ class Post extends CI_Controller
     }
     public function send_editar_update()
     {
-      # code...
+        // code...
       $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[5]|max_length[20]');
-      $this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[5]|max_length[20]');
-      $this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|min_length[5]|max_length[20]');
-      $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
-      $this->form_validation->set_rules('rol', 'Cuenta', 'trim|required|min_length[5]|max_length[20]');
-      $this->form_validation->set_rules('Password', 'Clave', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('telefono', 'Telefono', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[50]');
+        $this->form_validation->set_rules('rol', 'Cuenta', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('Password', 'Clave', 'trim|required|min_length[5]|max_length[20]');
 
     // mensajes de validacion
      $this->form_validation->set_message('required', 'El campo %s es obligatorio');
-      $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
-      $this->form_validation->set_message('min_length[3]', 'El campo %s debe tener mas de 3 caracteres');
-      $this->form_validation->set_message('valid_email', 'El campo %s debe ser un email correcto');
-      $data = array(
+        $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
+        $this->form_validation->set_message('min_length[3]', 'El campo %s debe tener mas de 3 caracteres');
+        $this->form_validation->set_message('valid_email', 'El campo %s debe ser un email correcto');
+        $data = array(
            'nombre' => $this->input->post('nombre'),
            'telefono' => $this->input->post('telefono'),
            'email' => $this->input->post('email'),
@@ -240,21 +239,19 @@ class Post extends CI_Controller
            'login' => $this->input->post('login'),
       );
 
-      if ($this->form_validation->run() == true) {
-          $datos['mensaje'] = 'Validación correcta';
-          $template = strtolower($data['rol']);
-          if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
-              $this->load->view('post/manager_'.$template);
-          } else {
-              show_404();
-          }
-      } else {
-          $datos['mensaje'] = 'Validación incorrecta';
-          $this->load->view('post/Crear', $datos);
-      }
+        if ($this->form_validation->run() == true) {
+            $datos['mensaje'] = 'Validación correcta';
+            $template = strtolower($data['rol']);
+            if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
+                $this->load->view('post/manager_'.$template);
+            } else {
+                show_404();
+            }
+        } else {
+            $datos['mensaje'] = 'Validación incorrecta';
+            $this->load->view('post/Crear', $datos);
+        }
 
-      return $this->db->insert('usuario', $data);
-      }
-
-
+        return $this->db->insert('usuario', $data);
+    }
 }//finm
