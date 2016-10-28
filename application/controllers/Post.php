@@ -276,5 +276,6 @@ class Post extends CI_Controller
         // code...
 
         $this->Postm->delete_user($id_borrar);
+        //$this->pagination();
     }
 }//finm
