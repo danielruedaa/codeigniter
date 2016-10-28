@@ -47,17 +47,26 @@ class Postm extends CI_Model
     public function crearusuario($array)
     {
         // code...
-    return $this->db->insert('usuarios', $data);
+    return $this->db->insert('usuario', $data);
     }
-
-    public function update_user($array)
+    /**
+     * [update_user description].
+     *
+     * @param [type] $array [description]
+     *
+     * @return [type] [description]
+     */
+    public function update_user($data)
     {
         // code...
-        $update = $array;
-        echo '<pre>';
-        print_r($update);
-        echo '</pre>';
-        $this->db->where('id', $update['id']);
-        $this->db->update('usuario', $update);
+
+        $this->db->where('id', $data['id']);
+        $this->db->update('usuario', $data);
+    }
+
+    public function delete_user($id_borrar)
+    {
+        // code...
+        $this->db->delete('usuario', array('id' => $id_borrar));
     }
 }//fin

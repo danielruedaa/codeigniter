@@ -274,6 +274,7 @@ class Post extends CI_Controller
     public function send_borrar($id_borrar)
     {
         // code...
-      $this->Postm->getUser($dato_edicion);
+
+        $this->Postm->delete_user($id_borrar);
     }
 }//finm
