@@ -44,10 +44,10 @@ class Postm extends CI_Model
      *
      * @return [type] [description]
      */
-    public function crearusuario($array)
+    public function crearusuario($array_usuario)
     {
         // code...
-    return $this->db->insert('usuario', $data);
+    return $this->db->insert('usuario', $array_usuario);
     }
     /**
      * [update_user description].
@@ -68,5 +68,10 @@ class Postm extends CI_Model
     {
         // code...
         $this->db->delete('usuario', array('id' => $id_borrar));
+    }
+    public function crear_post($array_post)
+    {
+        // code...
+         return $this->db->insert('post', $array_usuario);
     }
 }//fin

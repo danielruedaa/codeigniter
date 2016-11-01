@@ -26,7 +26,9 @@
 <div class="text-center">
 
 <?php if (!empty($query)): ?>
-
+<?php $ingreso2 = $_SESSION['email'];
+echo 'Ingreso como '.$ingreso2;
+?>
 <?php foreach ($query->result() as $rows) : ?>
   <tr>
     <td><?php echo $id = $rows->id ?></td>
@@ -70,11 +72,11 @@ echo $this->pagination->create_links();
 
 </tr>
 </table>
-<ul>
+<ul class="list-inline">
   <li><a href = "<?php echo site_url('post'); ?>">Inicio</a></li>
   <li><a href = "<?php echo site_url('post/manager_editor'); ?>">Crear post</a></li>
   <li><a href = "<?php echo site_url('post/manager_usuario'); ?>">Ver el post</a></li>
-
+  <li><a href = "<?php echo site_url('post/logout'); ?>">Salir</a></li>
 </ul>
 </div>
 </div>
