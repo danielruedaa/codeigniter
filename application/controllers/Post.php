@@ -25,9 +25,9 @@ class Post extends CI_Controller
                 //$this->load->view('post/Inicio'); //cargo el inicio del proyecto
                 //veri si existe la variable session
                 if (!empty($this->session->userdata('email'))) {
-                    $this->load->view('post/Inicio'); //cargo el inicio del proyecto
-                } else {
                     redirect('post/manager_usuario');
+                } else {
+                    $this->load->view('post/Inicio'); //cargo el inicio del proyecto
                 }
     }
     /**
@@ -61,7 +61,12 @@ class Post extends CI_Controller
                         //cargar la session
                       $this->session->set_userdata($data);
                         //echo   $this->session->userdata('email');
-                        $this->load->view('post/manager_'.$template);
+
+                        if ($template == 'Administrador') {
+                            redirect('post/pagination');
+                        } else {
+                            $this->load->view('post/manager_'.$template);
+                        }
                     } else {
                         show_404();
                     }
@@ -146,7 +151,11 @@ class Post extends CI_Controller
                 $template = strtolower($data['rol']);
                 if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
                     $this->session->set_userdata($data);
-                    $this->load->view('post/manager_'.$template);
+                    if ($template == 'Administrador') {
+                        redirect('post/pagination');
+                    } else {
+                        $this->load->view('post/manager_'.$template);
+                    }
                 } else {
                     show_404();
                 }
@@ -301,7 +310,6 @@ class Post extends CI_Controller
       //$this->session->unset_
       unset($_SESSION['email']);
         $this->session->sess_destroy();
-        //echo 'logout';
-        //redirect('index');
+        redirect('post/index');
     }
 }//finm

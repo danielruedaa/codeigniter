@@ -26,10 +26,20 @@
 <div class="text-center">
 
 <?php if (!empty($query)): ?>
-<?php $ingreso2 = $_SESSION['email'];
-echo 'Ingreso como '.$ingreso2;
+<?php $control = false;
+if (isset($_SESSION['email'])) {
+    $ingreso2 = $_SESSION['email'];
+    $control = true;
+    echo 'Ingreso como '.$ingreso2;
+} else {
+    echo 'No hay usuario registrado';
+}
+
 ?>
 <?php foreach ($query->result() as $rows) : ?>
+  <?php if ($control == true) {
+    // code...
+ ?>
   <tr>
     <td><?php echo $id = $rows->id ?></td>
     <td><?php echo $rows->nombre ?></td>
@@ -41,29 +51,18 @@ echo 'Ingreso como '.$ingreso2;
    <td>
 
 <?php
-echo anchor('post/send_editar/'.$id, 'editar', array('class' => '_editar'));
-?>
+echo anchor('post/send_editar/'.$id, 'editar', array('class' => '_editar')); ?>
 
 <?php
-echo anchor('post/send_borrar/'.$id, 'borrar', array('class' => '_borrar'));
-?>
+echo anchor('post/send_borrar/'.$id, 'borrar', array('class' => '_borrar')); ?>
 
-
-<?php
- $funcion = 'onClick="msgb()"';
- $buttonDelete = array(
-    'name' => 'buttonDelete',
-    'value' => $id,
-);
-//pendiente hacerlo con el boton
-//echo form_button($buttonDelete, 'borrar', $funcion);
-?>
     </td>
   </tr>
-<script language="javascript">
+  <?php
 
-</script>
-
+} else {
+    echo 'no se puede mostrar tabla';
+} ?>
 <?php endforeach;
 echo $this->pagination->create_links();
  ?>
