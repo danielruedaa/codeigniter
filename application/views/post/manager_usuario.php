@@ -32,27 +32,27 @@
 <h1>Bienvenido al sistema </h1>
 </div>
 
- <div class="container" id="general">
+ <div id="general" class="container" >
 <table class="table">
 
   <?php if (!empty($query)): ?>
   <?php foreach ($query->result() as $rows) : ?>
     <tr>
+      <td><?php $id = $rows->id ?></td>
       <td><?php echo $rows->nombre ?></td>
       <td><?php echo $rows->post ?></td>
       <td><?php echo $rows->created ?></td>
-     <td>
-
-<input   type="button" value="editar" onclick="msge()" />
-<input   type="button" value="borrar" onclick="msgb()" />
+      <td><?php
+    echo anchor('post/send_editar/'.$id, 'editar', array('class' => '_editar')); ?>
+     </td>
+     <td><?php
+    echo anchor('post/send_borrar/'.$id, 'borrar', array('class' => '_borrar')); ?>
+     </td>
+</tr>
 <?php endforeach;
 echo $this->pagination->create_links();
 ?>
-<tr>
-<ul>
-<li><a href = "<?php echo site_url('post'); ?>">Inicio</a></li>
-</ul>
-</tr>
+
 
 
 

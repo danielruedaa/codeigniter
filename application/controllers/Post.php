@@ -220,7 +220,7 @@ class Post extends CI_Controller
     {
         // code...http://127.0.0.1/codeigniter/index.php/post/pagination
       $this->load->library('pagination');
-        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/pagination/post';
+        $config['base_url'] = 'http://10.0.0.59/codeigniter/index.php/post/paginationpost';
         $config['per_page'] = 4;
         $config['num_links'] = 5;
         $config['total_rows'] = $this->db->get('post')->num_rows();
