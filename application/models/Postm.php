@@ -69,9 +69,26 @@ class Postm extends CI_Model
         // code...
         $this->db->delete('usuario', array('id' => $id_borrar));
     }
+    public function delete_post($id_borrar)
+    {
+        // code...
+        $this->db->delete('post', array('id' => $id_borrar));
+    }
     public function crear_post($array_post)
     {
         // code...
          return $this->db->insert('post', $array_usuario);
+    }
+    public function get_post($dato_edicion)
+    {
+        $query = $this->db->get_where('post', array('id' => $dato_edicion));
+
+        return $query->row_array();
+    }
+    public function update_post($data)
+    {
+        // code...
+        $this->db->where('id', $data['id']);
+        $this->db->update('post', $data);
     }
 }//fin

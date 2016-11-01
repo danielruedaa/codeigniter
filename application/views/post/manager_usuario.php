@@ -32,27 +32,51 @@
 <h1>Bienvenido al sistema </h1>
 </div>
 
- <div class="container" id="general">
+ <div id="general" class="container" >
+   <?php $control = false;
+   if (isset($_SESSION['email'])) {
+       $ingreso2 = $_SESSION['email'];
+       $control = true;
+       echo 'Ingreso como '.$ingreso2;
+   } else {
+       echo 'No hay usuario registrado';
+   }
+   ?>
 <table class="table">
+  <tr>
 
+    <td><label> Nombre</label></td>
+    <td><label> Post</label></td>
+    <td><label> Fecha</label></td>
+    <td><label> Opciones</label></td>
+  </tr>
   <?php if (!empty($query)): ?>
   <?php foreach ($query->result() as $rows) : ?>
+    <?php if ($control == true) {
+       // code...
+   ?>
     <tr>
+      <?php $id = $rows->id ?>
       <td><?php echo $rows->nombre ?></td>
       <td><?php echo $rows->post ?></td>
       <td><?php echo $rows->created ?></td>
-     <td>
+      <td><?php
+    echo anchor('post/editar_post/'.$id, 'editar', array('class' => '_editar')); ?>
+     </td>
+     <td><?php
+    echo anchor('post/editar_post/'.$id, 'borrar', array('class' => '_borrar')); ?>
+     </td>
+</tr>
+<?php
 
-<input   type="button" value="editar" onclick="msge()" />
-<input   type="button" value="borrar" onclick="msgb()" />
+   } else {
+       echo 'no se puede mostrar tabla';
+   } ?>
 <?php endforeach;
+echo '<br>';
 echo $this->pagination->create_links();
 ?>
-<tr>
-<ul>
-<li><a href = "<?php echo site_url('post'); ?>">Inicio</a></li>
-</ul>
-</tr>
+
 
 
 
@@ -66,10 +90,15 @@ echo $this->pagination->create_links();
 </tr>
 
 </div>
+
 </div>
 
 
 </table>
+<ul class="list-inline" >
+<li><a href = "<?php echo site_url('post/logout'); ?>">Salir</a></li>
+<li><a href = "<?php echo site_url('post/manager_editor'); ?>">Crear post</a></li>
+</ul>
 </div>
 
 </body>
