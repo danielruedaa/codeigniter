@@ -12,6 +12,7 @@ class Post extends CI_Controller
             //  $this->load->helper('form');
             //$this->load->helper('form_validation');
           $this->load->model('Postm'); //cago el modelo
+          $this->load->library('session'); //cargo session
     }
     /**
      * [index description].
@@ -21,7 +22,13 @@ class Post extends CI_Controller
     public function index()
     {
         //  $leerdb['news'] = $this->modelopost->get_news();
-                $this->load->view('post/Inicio'); //cargo el inicio del proyecto
+                //$this->load->view('post/Inicio'); //cargo el inicio del proyecto
+                //veri si existe la variable session
+                if (!empty($this->session->userdata('email'))) {
+                    $this->load->view('post/Inicio'); //cargo el inicio del proyecto
+                } else {
+                    redirect('post/manager_usuario');
+                }
     }
     /**
      * Genera algo.
@@ -39,6 +46,7 @@ class Post extends CI_Controller
         $data = array(
           'email' => $this->input->post('email'),
           'clave' => $this->input->post('Password'),
+          'login' => true,
           );
 
         if ($this->form_validation->run() == true) {
@@ -50,6 +58,9 @@ class Post extends CI_Controller
                 if ($data['email'] == $infoUser['email'] && $data['clave'] == $infoUser['clave']) {
                     $template = strtolower($infoUser['rol']);
                     if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
+                        //cargar la session
+                      $this->session->set_userdata($data);
+                        //echo   $this->session->userdata('email');
                         $this->load->view('post/manager_'.$template);
                     } else {
                         show_404();
@@ -134,6 +145,7 @@ class Post extends CI_Controller
                 $datos['mensaje'] = 'Validación correcta';
                 $template = strtolower($data['rol']);
                 if (file_exists(APPPATH.'views/post/manager_'.$template.'.php')) {
+                    $this->session->set_userdata($data);
                     $this->load->view('post/manager_'.$template);
                 } else {
                     show_404();
@@ -142,8 +154,7 @@ class Post extends CI_Controller
                 $datos['mensaje'] = 'Validación incorrecta';
                 $this->load->view('post/Crear', $datos);
             }
-
-            return $this->db->insert('usuario', $data);
+            $this->Postm->crearusuario($data);
         }
     /**
      * [guardarPost description].
@@ -171,8 +182,7 @@ class Post extends CI_Controller
                'created' => date('Y-m-d H:i:s'),
           );
             $datos['mensaje'] = 'Validación correcta';
-
-            return $this->db->insert('post', $datapost);
+            $this->Postm->crear_post($data);
         } else {
             $datos['mensaje'] = 'Validación incorrecta';
             $this->load->view('post/Crear', $datos);
@@ -270,12 +280,28 @@ class Post extends CI_Controller
         }
 //https://www.codeigniter.com/userguide2/database/active_record.html
     }
-
+    /**
+     * [send_borrar description].
+     *
+     * @param [type] $id_borrar [description]
+     *
+     * @return [type] [description]
+     */
     public function send_borrar($id_borrar)
     {
         // code...
 
         $this->Postm->delete_user($id_borrar);
+        redirect('pagination');
         //$this->pagination();
+    }
+    public function logout()
+    {
+        // code...
+      //$this->session->unset_
+      unset($_SESSION['email']);
+        $this->session->sess_destroy();
+        //echo 'logout';
+        //redirect('index');
     }
 }//finm
