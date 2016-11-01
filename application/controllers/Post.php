@@ -172,7 +172,7 @@ class Post extends CI_Controller
      *
      * @return [type] [description]
      */
-    public function guardarPost($value = '')
+    public function guardarPost()
     {
         // code...
         // validacion de datos
@@ -302,6 +302,67 @@ class Post extends CI_Controller
 
         $this->Postm->delete_user($id_borrar);
         redirect('pagination');
+        //$this->pagination();
+    }
+
+    public function editar_post($dato_edicion)
+    {
+        // code...
+      //envio un parametro y recoj el dato que llega por la url (el id)
+      $edit_post['query_edicion'] = $this->Postm->get_post($dato_edicion);
+
+        echo '<pre>';
+        print_r($edit_post);
+        echo '</pre>';
+
+      //cargo la vista y mando el datos
+
+      $this->load->view('post/editar_post', $edit_post);
+      //recivir los datos modificados por el form
+    }
+
+    public function post_update()
+    {
+        // code...
+        $this->form_validation->set_rules('nombre', 'Nombre', 'trim|required|min_length[5]|max_length[20]');
+        $this->form_validation->set_rules('pos', 'Escribe', 'trim|required|min_length[5]');
+
+    // mensajes de validacion
+     $this->form_validation->set_message('required', 'El campo %s es obligatorio');
+        $this->form_validation->set_message('alpha', 'El campo %s debe estar compuesto solo por letras');
+        $this->form_validation->set_message('min_length[5]', 'El campo %s debe tener mas de 5 caracteres');
+        $data = array(
+           'id' => $this->input->post('id'),
+           'nombre' => $this->input->post('nombre'),
+           'post' => $this->input->post('pos'),
+      );
+
+        if ($this->form_validation->run() == true) {
+            $datos['mensaje'] = 'Validación correcta';
+            //mando el dato al modelo para ingresar a la bd
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+            $this->Postm->update_post($data);
+        } else {
+            $datos['mensaje'] = 'Validación incorrecta';
+            $this->load->view('post/editar_usuario', $datos);
+        }
+//https://www.codeigniter.com/userguide2/database/active_record.html
+    }
+    /**
+     * [send_borrar description].
+     *
+     * @param [type] $id_borrar [description]
+     *
+     * @return [type] [description]
+     */
+    public function borrar_post($id_borrar)
+    {
+        // code...
+
+        $this->Postm->delete_post($id_borrar);
+        redirect('post/paginationpost');
         //$this->pagination();
     }
     public function logout()

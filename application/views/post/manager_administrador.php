@@ -36,6 +36,15 @@ if (isset($_SESSION['email'])) {
 }
 
 ?>
+<tr>
+  <td><label> Id</label></td>
+  <td><label> Nombre</label></td>
+  <td><label> Login</label></td>
+  <td><label> Correo</label></td>
+  <td><label> Rol</label></td>
+  <td><label> Login</label></td>
+  <td><label> Opciones</label></td>
+</tr>
 <?php foreach ($query->result() as $rows) : ?>
   <?php if ($control == true) {
     // code...

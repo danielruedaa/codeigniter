@@ -34,19 +34,25 @@
 
  <div id="general" class="container" >
 <table class="table">
+  <tr>
 
+    <td><label> Nombre</label></td>
+    <td><label> Post</label></td>
+    <td><label> Fecha</label></td>
+    <td><label> Opciones</label></td>
+  </tr>
   <?php if (!empty($query)): ?>
   <?php foreach ($query->result() as $rows) : ?>
     <tr>
-      <td><?php $id = $rows->id ?></td>
+      <?php $id = $rows->id ?>
       <td><?php echo $rows->nombre ?></td>
       <td><?php echo $rows->post ?></td>
       <td><?php echo $rows->created ?></td>
       <td><?php
-    echo anchor('post/send_editar/'.$id, 'editar', array('class' => '_editar')); ?>
+    echo anchor('post/editar_post/'.$id, 'editar', array('class' => '_editar')); ?>
      </td>
      <td><?php
-    echo anchor('post/send_borrar/'.$id, 'borrar', array('class' => '_borrar')); ?>
+    echo anchor('post/editar_post/'.$id, 'borrar', array('class' => '_borrar')); ?>
      </td>
 </tr>
 <?php endforeach;
