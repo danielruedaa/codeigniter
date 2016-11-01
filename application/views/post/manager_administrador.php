@@ -81,9 +81,9 @@ echo $this->pagination->create_links();
 </tr>
 </table>
 <ul class="list-inline">
-  <li><a href = "<?php echo site_url('post'); ?>">Inicio</a></li>
+
   <li><a href = "<?php echo site_url('post/manager_editor'); ?>">Crear post</a></li>
-  <li><a href = "<?php echo site_url('post/manager_usuario'); ?>">Ver el post</a></li>
+  <li><a href = "<?php echo site_url('post/paginationpost'); ?>">Ver el post</a></li>
   <li><a href = "<?php echo site_url('post/logout'); ?>">Salir</a></li>
 </ul>
 </div>

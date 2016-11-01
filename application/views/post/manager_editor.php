@@ -64,8 +64,8 @@
 <table class="table" >
 
 <ul class="list-inline">
- <li><a href =" <?php echo site_url('post'); ?>">inicio</a> </li>
- <li><a href = "<?php echo site_url('post/leer'); ?>">ir al post</a></li>
+ 
+ <li><a href = "<?php echo site_url('post/paginationpost'); ?>">ir al post</a></li>
  <li><a href = "<?php echo site_url('post/logout'); ?>">Salir</a></li>
  <li><input type="submit" value="guardar"> </li>
 

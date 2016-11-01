@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
 <link rel="stylesheet" type="text/css" href="estiloCss/hojaEstilo.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="text/css" href="estiloCss/bootstrap-responsive.css"/>
@@ -28,7 +28,7 @@
 
 </head>
 <body>
-<h1>Editar usuario </h1></div>
+<h1>Editar Post </h1></div>
 
   <?php if (!empty($query_edicion)):
     echo '<pre>';
@@ -50,12 +50,16 @@
 </tr>
 <td class="text-left">post : </td>
 <td class="text-left">
-<input type="text" name= "pos" value= "<?php echo $query_edicion['post'] ?>" placeholder="shofry" required="required">              </td><!--   -->
+  <textarea name="pos" id="editor1" value="<?php echo $query_edicion['post'] ?>" ></textarea>
+</td><!--   -->
 </tr>
-      <td><a href="<?php echo site_url('post'); ?>"><samll>Regresar</samll> </a> </td>
+      <td><a href="<?php echo site_url('post/paginationpost'); ?>"><samll>Regresar</samll> </a> </td>
 
     <td > <input type="submit" value="Editar" > </td>
 </table>
+<script>
+           CKEDITOR.replace( 'editor1' );
+       </script>
 
 <?php else : ?>
 <?php endif; ?>

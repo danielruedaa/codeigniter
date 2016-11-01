@@ -33,6 +33,15 @@
 </div>
 
  <div id="general" class="container" >
+   <?php $control = false;
+   if (isset($_SESSION['email'])) {
+       $ingreso2 = $_SESSION['email'];
+       $control = true;
+       echo 'Ingreso como '.$ingreso2;
+   } else {
+       echo 'No hay usuario registrado';
+   }
+   ?>
 <table class="table">
   <tr>
 
@@ -43,6 +52,9 @@
   </tr>
   <?php if (!empty($query)): ?>
   <?php foreach ($query->result() as $rows) : ?>
+    <?php if ($control == true) {
+       // code...
+   ?>
     <tr>
       <?php $id = $rows->id ?>
       <td><?php echo $rows->nombre ?></td>
@@ -55,7 +67,13 @@
     echo anchor('post/editar_post/'.$id, 'borrar', array('class' => '_borrar')); ?>
      </td>
 </tr>
+<?php
+
+   } else {
+       echo 'no se puede mostrar tabla';
+   } ?>
 <?php endforeach;
+echo '<br>';
 echo $this->pagination->create_links();
 ?>
 
@@ -72,10 +90,15 @@ echo $this->pagination->create_links();
 </tr>
 
 </div>
+
 </div>
 
 
 </table>
+<ul class="list-inline" >
+<li><a href = "<?php echo site_url('post/logout'); ?>">Salir</a></li>
+<li><a href = "<?php echo site_url('post/manager_editor'); ?>">Crear post</a></li>
+</ul>
 </div>
 
 </body>

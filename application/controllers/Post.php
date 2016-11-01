@@ -25,7 +25,7 @@ class Post extends CI_Controller
                 //$this->load->view('post/Inicio'); //cargo el inicio del proyecto
                 //veri si existe la variable session
                 if (!empty($this->session->userdata('email'))) {
-                    redirect('post/manager_usuario');
+                    redirect('post/Inicio');
                 } else {
                     $this->load->view('post/Inicio'); //cargo el inicio del proyecto
                 }
@@ -61,11 +61,20 @@ class Post extends CI_Controller
                         //cargar la session
                       $this->session->set_userdata($data);
                         //echo   $this->session->userdata('email');
-
-                        if ($template == 'Administrador') {
-                            redirect('post/pagination');
-                        } else {
-                            $this->load->view('post/manager_'.$template);
+                        //$template2 = ucfirst($template);
+                        switch ($template) {
+                          case 'administrador':
+                            // code...
+                             redirect('post/pagination');
+                            break;
+                            case 'usuario':
+                              // code...
+                              redirect('post/paginationpost');
+                              break;
+                          default:
+                            // code...
+                               $this->load->view('post/manager_'.$template);
+                            break;
                         }
                     } else {
                         show_404();
@@ -153,6 +162,7 @@ class Post extends CI_Controller
                     $this->session->set_userdata($data);
                     if ($template == 'Administrador') {
                         redirect('post/pagination');
+                        echo 'datos buenos';
                     } else {
                         $this->load->view('post/manager_'.$template);
                     }
@@ -283,6 +293,7 @@ class Post extends CI_Controller
             print_r($data);
             echo '</pre>';
             $this->Postm->update_user($data);
+            redirect('post/send_editar');
         } else {
             $datos['mensaje'] = 'Validación incorrecta';
             $this->load->view('post/editar_usuario', $datos);
@@ -344,6 +355,8 @@ class Post extends CI_Controller
             print_r($data);
             echo '</pre>';
             $this->Postm->update_post($data);
+            //$this->load->view('post/paginationpost', $datos);
+            redirect('post/paginationpost');
         } else {
             $datos['mensaje'] = 'Validación incorrecta';
             $this->load->view('post/editar_usuario', $datos);
