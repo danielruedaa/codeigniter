@@ -38,13 +38,22 @@
 <title>inicio</title>
 
 <body>
-  <?php
 
+<?php
   //echo validation_errors(); // para validar los errores
   echo form_open('post/session'); // asignar la ruta para mandar los datos por post
   ?>
 
 <div class="container">
+  <?php $control = false;
+  if (isset($_SESSION['email'])) {
+      $ingreso2 = $_SESSION['email'];
+      $control = true;
+      echo 'Ingreso como '.$ingreso2;
+  } else {
+      echo 'No hay usuario registrado';
+  }
+  ?>
 <div class="text-center">
 <h2>login</h2>
 <table id="prueba" class="table">

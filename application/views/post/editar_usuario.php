@@ -45,7 +45,7 @@
 </tr>
     <td  >nombre completo : </td>
     <td  >
-    <input type="text" name= "nombre"        value= "<?php echo $query_edicion['nombre']   ?>" placeholder="Daniel Rueda" required="required">           </td>
+    <input type="text" name= "nombre"       value= "<?php echo $query_edicion['nombre']   ?>" placeholder="Daniel Rueda" required="required">           </td>
     </tr>
     <td  >login : </td>
     <td  >
